@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from time import sleep
 
 def iniciar_driver():
     chrome_options = Options()
@@ -38,11 +39,19 @@ def iniciar_driver():
 
 driver = iniciar_driver()
 # Navegar até um site
-driver.get('https://cursoautomacao.netlify.app/desafios')
-buttons = driver.find_elements(By.XPATH,'//section[@class="jumbotron desafios1"]/button')
-for i in range(len(buttons)):
-    if buttons[i].is_enabled:
-        print(f"botao {i+1} está habilitado")
-    else:
-        print(f"botao {i+1} nao está habilitado")
+driver.get('https://cursoautomacao.netlify.app/login')
+sleep(5)
+campo_email = driver.find_element(By.XPATH,'//div[@class="form-group loginForm"]/input')
+sleep(2)
+campo_email.send_keys("elonmusk@xtwitter.com")
+sleep(2)
+campo_senha = driver.find_element(By.XPATH,'//div[@class="form-group"]/input')
+sleep(2)
+campo_senha.send_keys("lapdog")
+sleep(2)
+botao_enviar = driver.find_element(By.XPATH,'//div[@class="container"]/button')
+sleep(2)
+botao_enviar.click()
+
 input('aperta uma tecla para fechar')
+#driver.close()
